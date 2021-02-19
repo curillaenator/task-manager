@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "MyriadPro";
+  src: local("MyriadPPO"), url(./Fonts/MyriadProRegular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "CorporateA";
+  src: local("CorporateA"),
+    url(./Fonts/CorporateA-Regular.ttf) format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
