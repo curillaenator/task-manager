@@ -1,24 +1,22 @@
-import { connect } from "react-redux";
-import Main from "./Main/Main";
-import Aside from "./Aside/Aside";
+import { BrowserRouter } from "react-router-dom";
+import { AsideCont } from "./Aside/AsideCont";
 import Header from "./Header/Header";
+import Content from "./Content/Content";
 
 import styles from "./app.module.scss";
 
-function AppCont(props) {
+const App = () => {
   return (
-    <div className={styles.container}>
-      <Aside menuUI={props.menuUI} />
-      <div className={styles.body}>
-        <Header />
-        <Main />
+    <BrowserRouter>
+      <div className={styles.container}>
+        <AsideCont />
+        <div className={styles.content}>
+          <Header />
+          <Content />
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
-}
+};
 
-const mstp = (state) => ({
-  menuUI: state.ui.menuUI,
-});
-
-export const App = connect(mstp, {})(AppCont);
+export default App;

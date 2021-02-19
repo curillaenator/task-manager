@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Logo from "../../Assets/Images/Logo.png";
 
 import styles from "./aside.module.scss";
@@ -12,7 +13,6 @@ const Item = ({ title, icon }) => {
 };
 
 const Aside = ({ menuUI }) => {
-  console.log(menuUI.map((el) => el));
   return (
     <aside className={styles.aside}>
       <div className={styles.logo}>
