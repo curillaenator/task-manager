@@ -1,0 +1,18 @@
+@import "../../../../palette.scss";
+
+.newRequest {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 970px;
+  .formTitle {
+    width: 100%;
+    height: 60px;
+    background-color: $menu;
+  }
+  .formBody {
+    width: 100%;
+    height: calc(100vh - 125px);
+    background-color: $form;
+  }
+}

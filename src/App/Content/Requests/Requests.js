@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import NewRequest from "./NewRequest/NewRequest";
 import { Application } from "./Applications/Application";
 import { Button } from "../../UICommon/Button/Button";
 
@@ -36,9 +37,17 @@ const Requests = (props) => {
           dashSizes={props.dashSizes}
         />
         <div className={styles.listing}>
-          <Application dashSizes={props.dashSizes} dashData={props.dashData} />
+          {props.dashData.map((req) => (
+            <Application
+              data={req}
+              dashSizes={props.dashSizes}
+              priorities={props.priorities}
+              key={req.id}
+            />
+          ))}
         </div>
       </div>
+      <NewRequest />
     </div>
   );
 };
@@ -48,6 +57,7 @@ const mstp = (state) => ({
   dashboardNames: state.ui.requests.dashboardNames,
   dashSizes: state.ui.requests.dashSizes,
   dashData: state.requests.requests,
+  priorities: state.requests.priorities,
 });
 
 export const RequestsCont = connect(mstp, {})(Requests);
