@@ -1,11 +1,20 @@
+import { useEffect } from "react";
+import { connect } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { AsideCont } from "./Aside/AsideCont";
 import Header from "./Header/Header";
 import Content from "./Content/Content";
-
+import { setInitial } from "../Redux/reducers/requestsReducer";
 import styles from "./app.module.scss";
 
-const App = () => {
+const AppCont = ({ isInitialized, setInitial }) => {
+  useEffect(() => setInitial(), []);
+  if (!isInitialized)
+    return (
+      <div className={styles.container}>
+        <h2 className={styles.loader}>Загрузка...</h2>
+      </div>
+    );
   return (
     <BrowserRouter>
       <div className={styles.container}>
@@ -19,4 +28,8 @@ const App = () => {
   );
 };
 
-export default App;
+const mstp = (state) => ({
+  isInitialized: state.app.isInitialized,
+});
+
+export const App = connect(mstp, { setInitial })(AppCont);

@@ -3,12 +3,17 @@ import Logo from "../../Assets/Images/Logo.png";
 
 import styles from "./aside.module.scss";
 
-const Item = ({ title, icon }) => {
+const Item = (props) => {
+  const { title, path, icon } = props.item;
   return (
-    <div className={styles.item}>
+    <NavLink
+      to={path}
+      className={styles.item}
+      activeClassName={styles.active}
+    >
       <img src={icon} alt={title} />
       <p>{title}</p>
-    </div>
+    </NavLink>
   );
 };
 
@@ -20,7 +25,7 @@ const Aside = ({ menuUI }) => {
       </div>
       <div className={styles.menu}>
         {menuUI.map((item) => (
-          <Item title={item.title} icon={item.icon} key={item.title} />
+          <Item item={item} key={item.title} />
         ))}
       </div>
     </aside>

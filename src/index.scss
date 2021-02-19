@@ -1,3 +1,5 @@
+@import "./palette.scss";
+
 @font-face {
   font-family: "MyriadPro";
   src: local("MyriadPPO"), url(./Fonts/MyriadProRegular.ttf) format("truetype");
@@ -18,4 +20,5 @@
 body {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
+  color: $textDark;
 }

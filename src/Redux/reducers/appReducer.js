@@ -15,6 +15,6 @@ export const app = (state = initialState, action) => {
 
 // ACTIONs
 
-const initialize = () => ({ type: INITIALIZE });
+export const initialize = () => ({ type: INITIALIZE });
 
 //THUNKs

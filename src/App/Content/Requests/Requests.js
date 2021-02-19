@@ -1,14 +1,19 @@
 import { connect } from "react-redux";
+import { Application } from "./Applications/Application";
 import { Button } from "../../UICommon/Button/Button";
 
 import styles from "./requests.module.scss";
 
-const DashboardHeader = ({ dashboardHeader }) => {
+const DashboardHeader = ({ dashboardNames, dashSizes }) => {
   return (
-    <div className={styles.header}>
-      {dashboardHeader.map((el, i) => (
-        <div className={styles.headerItem} key={i}>
-          {el}
+    <div className={styles.naming}>
+      {dashboardNames.map((el) => (
+        <div
+          className={styles.item}
+          key={el.name}
+          style={{ width: dashSizes[el.name] }}
+        >
+          <p>{el.title}</p>
         </div>
       ))}
     </div>
@@ -26,7 +31,13 @@ const Requests = (props) => {
         />
       </div>
       <div className={styles.dashboard}>
-        <DashboardHeader dashboardHeader={props.dashboardHeader} />
+        <DashboardHeader
+          dashboardNames={props.dashboardNames}
+          dashSizes={props.dashSizes}
+        />
+        <div className={styles.listing}>
+          <Application dashSizes={props.dashSizes} dashData={props.dashData} />
+        </div>
       </div>
     </div>
   );
@@ -34,9 +45,11 @@ const Requests = (props) => {
 
 const mstp = (state) => ({
   newRequest: state.ui.requests.newRequest,
-  dashboardHeader: state.ui.requests.dashboardHeader,
-})
+  dashboardNames: state.ui.requests.dashboardNames,
+  dashSizes: state.ui.requests.dashSizes,
+  dashData: state.requests.requests,
+});
 
-export const RequestsCont = connect(mstp, {})(Requests)
+export const RequestsCont = connect(mstp, {})(Requests);
 
 export default Requests;

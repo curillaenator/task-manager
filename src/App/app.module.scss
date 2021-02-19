@@ -3,7 +3,14 @@
   justify-content: space-between;
   width: 1600px;
   margin: 0 auto;
+  position: relative;
   .content {
     width: 100%;
+  }
+  .loader {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
   }
 }
