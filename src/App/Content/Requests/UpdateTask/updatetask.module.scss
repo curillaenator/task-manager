@@ -77,11 +77,14 @@
     width: 100%;
     height: calc(850px - 125px);
     background-color: $form;
-    padding-top: 26px;
     padding-left: 38px;
     .descriptions {
-      width: 736px;
+      width: 698px;
+      padding-top: 26px;
+      flex-shrink: 0;
       padding-right: 32px;
+      box-sizing: border-box;
+
       .descr {
         margin-bottom: 45px;
         & > h3 {
@@ -105,8 +108,94 @@
       .save {
         margin-bottom: 45px;
       }
+      .comment {
+        .title {
+          display: flex;
+          align-items: center;
+          margin-bottom: 22px;
+          .avatar {
+            & > img {
+              width: 40px;
+              height: 40px;
+              object-fit: cover;
+              border-radius: 50%;
+              margin-right: 11px;
+            }
+          }
+          .misc {
+            & > h3 {
+              color: $textMediumGray;
+              font-family: "Ubuntu", serif;
+              font-size: 14px;
+              font-weight: 400;
+            }
+            & > p {
+              color: $textMediumGray;
+              font-family: "CorporateA";
+              font-size: 14px;
+            }
+          }
+        }
+        .text {
+          padding: 13px 11px;
+          margin-left: 51px;
+          background-color: $comment;
+          border-radius: 6px;
+          border: 1px solid $ui3;
+        }
+      }
     }
-    .statuses {
+    .edits {
+      width: 240px;
+      flex-shrink: 0;
+      padding: 26px 28px;
+      border-left: 1px solid $ui3;
+      .status {
+        display: flex;
+        align-items: center;
+        margin-bottom: 38px;
+        .dot {
+          border-radius: 50%;
+          width: 12px;
+          height: 12px;
+          background-color: yellowgreen;
+        }
+        & > select {
+          display: block;
+          width: 100%;
+          outline: none;
+          padding-left: 8px;
+          border: none;
+          background: transparent;
+          box-shadow: none;
+          font-family: "Roboto", serif;
+          font-size: 14px;
+          font-weight: 400;
+          cursor: pointer;
+        }
+      }
+      .issuer,
+      .creator,
+      .manager,
+      .priotity,
+      .expiry,
+      .tags {
+        margin-bottom: 30px;
+        & > h3 {
+          font-family: "Roboto", serif;
+          font-size: 14px;
+          font-weight: 300;
+          color: $textGray;
+          margin-bottom: 12px;
+        }
+        & > p {
+          font-family: "Roboto", serif;
+          font-size: 14px;
+          font-weight: 300;
+          color: $textDark;
+          margin-bottom: 12px;
+        }
+      }
     }
   }
 }

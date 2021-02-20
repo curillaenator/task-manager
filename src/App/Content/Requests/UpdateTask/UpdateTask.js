@@ -15,6 +15,7 @@ const UpdateTask = (props) => {
           // values={values}
           form={form}
           right={props.right}
+          editTaskData={props.editTaskData}
           // pristine={pristine}
         />
       )}

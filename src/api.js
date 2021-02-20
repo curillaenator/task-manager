@@ -11,5 +11,7 @@ export const api = {
   getPriorities: () => base.get(`api/${key}/Priorities`).then((r) => r.data),
   getStatuses: () => base.get(`api/${key}/Statuses`).then((r) => r.data),
   createTask: (taskData) =>
-    base.post(`/api/${key}/Tasks`, taskData).then((r) => r.data),
+    base.post(`api/${key}/Tasks`, taskData).then((r) => r.data),
+  getManagers: () => base.get(`api/${key}/Users`).then((r) => r.data),
+  getTaskToEdit: (id) => base.get(`api/${key}/Tasks/${id}`).then((r) => r.data),
 };

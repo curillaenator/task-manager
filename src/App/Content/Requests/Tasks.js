@@ -4,7 +4,7 @@ import NewTask from "./NewTask/NewTask";
 import UpdateTask from "./UpdateTask/UpdateTask";
 import { Application } from "./Applications/Application";
 import { Button } from "../../UICommon/Button/Button";
-import { createTask } from "../../../Redux/reducers/tasksReducer";
+import { createTask, editTask } from "../../../Redux/reducers/tasksReducer";
 
 import styles from "./tasks.module.scss";
 
@@ -28,8 +28,6 @@ const Tasks = (props) => {
   const [isCreateForm, setCreateForm] = useState(false);
   const toggleCreateForm = () => setCreateForm(!isCreateForm);
 
-  const [isEditForm, setEditForm] = useState(true);
-
   const posCalc = () =>
     (window.innerWidth - 1600) / 2 < 0
       ? window.innerWidth - 1600
@@ -44,6 +42,7 @@ const Tasks = (props) => {
       window.removeEventListener("resize", () => setRight(posCalc()));
   });
 
+  const callEditForm = () => props.editTask(70684);
   return (
     <div className={styles.applications}>
       <div className={styles.buttons}>
@@ -53,6 +52,12 @@ const Tasks = (props) => {
           height={props.newTask.h}
           clicked={isCreateForm}
           handler={toggleCreateForm}
+        />
+        <Button
+          title="вызов"
+          width="128px"
+          height="40px"
+          handler={callEditForm}
         />
       </div>
 
@@ -81,7 +86,9 @@ const Tasks = (props) => {
         />
       )}
 
-      {isEditForm && <UpdateTask right={right} />}
+      {props.isEditFormOn && (
+        <UpdateTask right={right} editTaskData={props.editTaskData} />
+      )}
     </div>
   );
 };
@@ -94,6 +101,7 @@ const mstp = (state) => ({
   priorities: state.tasks.priorities,
   editTaskId: state.tasks.editTaskId,
   isEditFormOn: state.tasks.isEditFormOn,
+  editTaskData: state.tasks.editTaskData,
 });
 
-export const TasksCont = connect(mstp, { createTask })(Tasks);
+export const TasksCont = connect(mstp, { createTask, editTask })(Tasks);
