@@ -15,7 +15,7 @@ const initialState = {
     { title: "Настройки", path: "/settings", icon: settings },
   ],
   requests: {
-    newRequest: { ttl: "Создать заявку", w: "180px", h: "40px" },
+    newTask: { ttl: "Создать заявку", w: "180px", h: "40px" },
     dashSizes: {
       priority: "36px",
       id: "80px",
@@ -23,7 +23,7 @@ const initialState = {
       status: "125px",
       manager: "",
     },
-    dashboardNames: [
+    dashNames: [
       { name: "priority", title: "" },
       { name: "id", title: "ID" },
       { name: "name", title: "Название" },

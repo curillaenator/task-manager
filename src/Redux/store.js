@@ -3,12 +3,12 @@ import thunk from "redux-thunk";
 
 import { app } from "./reducers/appReducer";
 import { ui } from "./reducers/UIReducer";
-import { requests } from "./reducers/requestsReducer";
+import { tasks } from "./reducers/tasksReducer";
 
 const rootReducer = combineReducers({
   ui,
   app,
-  requests,
+  tasks,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));

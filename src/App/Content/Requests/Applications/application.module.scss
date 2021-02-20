@@ -26,6 +26,7 @@
   }
   .name {
     @include align;
+    padding-right: 16px;
     overflow: hidden;
     & > p {
       display: -webkit-box;

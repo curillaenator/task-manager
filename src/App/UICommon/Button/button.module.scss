@@ -5,21 +5,28 @@
   border-radius: 20px;
   outline: none;
   background-color: $primary;
-
-  font-family: "Ubuntu", sarif;
-  font-size: 16px;
-  font-weight: 300;
-  color: $textWhite;
   vertical-align: middle;
   transition: 0.1s linear;
   cursor: pointer;
   & > p {
-    // transform: translateY(-1px);
+    font-family: "Ubuntu", sarif;
+    font-size: 16px;
+    font-weight: 300;
+    color: $textWhite;
   }
   &:hover {
     background-color: $primaryHover;
   }
   &:active {
-    background-color: $primaryActive;
+    background-color: $primary;
+  }
+}
+.activated {
+  background-color: $activated;
+  &:hover {
+    background-color: $activatedHover;
+  }
+  &:active {
+    background-color: $activated;
   }
 }

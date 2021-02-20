@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AsideCont } from "./Aside/AsideCont";
 import Header from "./Header/Header";
 import Content from "./Content/Content";
-import { setInitial } from "../Redux/reducers/requestsReducer";
+import { setInitial } from "../Redux/reducers/tasksReducer";
 import styles from "./app.module.scss";
 
 const AppCont = ({ isInitialized, setInitial }) => {
