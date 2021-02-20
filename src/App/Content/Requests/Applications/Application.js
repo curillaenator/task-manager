@@ -42,9 +42,10 @@ const Manager = ({ manager }) => {
   return <div className={styles.manager}>{manager}</div>;
 };
 
-export const Application = ({ priorities, dashSizes, data }) => {
+export const Application = ({ priorities, dashSizes, data, editTask }) => {
+  const editTaskHandler = () => editTask(data.id);
   return (
-    <div className={styles.application}>
+    <div className={styles.application} onClick={editTaskHandler}>
       <Priority
         priorities={priorities}
         width={dashSizes.priority}

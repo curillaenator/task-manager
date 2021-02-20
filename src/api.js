@@ -14,4 +14,6 @@ export const api = {
     base.post(`api/${key}/Tasks`, taskData).then((r) => r.data),
   getManagers: () => base.get(`api/${key}/Users`).then((r) => r.data),
   getTaskToEdit: (id) => base.get(`api/${key}/Tasks/${id}`).then((r) => r.data),
+  updateTask: (updateData) =>
+    base.put(`api/${key}/Tasks`, updateData).then((r) => r),
 };

@@ -32,7 +32,7 @@ export const tasks = (state = initialState, action) => {
     case SET_EDIT_TASKDATA:
       return { ...state, editTaskData: action.payload };
     case SET_EDIT_FORM_OFF:
-      return { ...state, isEditFormOn: false };
+      return { ...state, editTaskId: null, isEditFormOn: false };
     case SET_MANAGERS:
       return { ...state, managers: action.payload };
     default:
@@ -47,7 +47,7 @@ const setPriorities = (payload) => ({ type: SET_PRIORITIES, payload });
 const setStatuses = (payload) => ({ type: SET_STATUSES, payload });
 const setEditTaskId = (id) => ({ type: SET_EDIT_TASKID, id });
 const setEditTaskData = (payload) => ({ type: SET_EDIT_TASKDATA, payload });
-const setEditFormOff = () => ({ type: SET_EDIT_FORM_OFF });
+export const setEditFormOff = () => ({ type: SET_EDIT_FORM_OFF });
 const setManagers = (payload) => ({ type: SET_MANAGERS, payload });
 
 // THUNKs
@@ -57,7 +57,6 @@ export const setInitial = () => async (dispatch) => {
   const priors = await api.getPriorities();
   const stats = await api.getStatuses();
   const managers = await api.getManagers();
-
   dispatch(setTasks(tasks));
   dispatch(setPriorities(priors));
   dispatch(setStatuses(stats));
@@ -74,7 +73,14 @@ export const createTask = (taskData) => async (dispatch) => {
 };
 
 export const editTask = (id) => async (dispatch) => {
-  const taskToEdit = await api.getTaskToEdit(id)
+  const taskToEdit = await api.getTaskToEdit(id);
   dispatch(setEditTaskData(taskToEdit));
   dispatch(setEditTaskId(id));
-}
+};
+
+export const updateTask = (updateData) => async (dispatch) => {
+  await api.updateTask(updateData);
+  dispatch(setEditFormOff());
+  const tasks = await api.getTasks();
+  dispatch(setTasks(tasks));
+};

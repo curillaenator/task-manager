@@ -3,7 +3,8 @@ import FormUpdate from "./FormUpdate";
 
 const UpdateTask = (props) => {
   const onSubmitCreate = (formData) => {
-    console.log(formData);
+    formData.id = props.editTaskId;
+    props.updateTask(formData);
   };
   return (
     <Form
@@ -12,10 +13,13 @@ const UpdateTask = (props) => {
         <FormUpdate
           toggleCreateForm={props.toggleCreateForm}
           handleSubmit={handleSubmit}
-          // values={values}
           form={form}
           right={props.right}
           editTaskData={props.editTaskData}
+          statuses={props.statuses}
+          managers={props.managers}
+          setEditFormOff={props.setEditFormOff}
+          // values={values}
           // pristine={pristine}
         />
       )}

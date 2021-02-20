@@ -4,7 +4,12 @@ import NewTask from "./NewTask/NewTask";
 import UpdateTask from "./UpdateTask/UpdateTask";
 import { Application } from "./Applications/Application";
 import { Button } from "../../UICommon/Button/Button";
-import { createTask, editTask } from "../../../Redux/reducers/tasksReducer";
+import {
+  createTask,
+  editTask,
+  updateTask,
+  setEditFormOff,
+} from "../../../Redux/reducers/tasksReducer";
 
 import styles from "./tasks.module.scss";
 
@@ -36,13 +41,13 @@ const Tasks = (props) => {
   const [right, setRight] = useState(posCalc());
 
   useEffect(() => {
-    isCreateForm &&
-      window.addEventListener("resize", () => setRight(posCalc()));
+    isCreateForm || props.isEditFormOn
+      ? window.addEventListener("resize", () => setRight(posCalc()))
+      : window.removeEventListener("resize", () => setRight(posCalc()));
     return () =>
       window.removeEventListener("resize", () => setRight(posCalc()));
-  });
+  }, [isCreateForm, props.isEditFormOn]);
 
-  const callEditForm = () => props.editTask(70684);
   return (
     <div className={styles.applications}>
       <div className={styles.buttons}>
@@ -52,12 +57,6 @@ const Tasks = (props) => {
           height={props.newTask.h}
           clicked={isCreateForm}
           handler={toggleCreateForm}
-        />
-        <Button
-          title="вызов"
-          width="128px"
-          height="40px"
-          handler={callEditForm}
         />
       </div>
 
@@ -73,6 +72,7 @@ const Tasks = (props) => {
               dashSizes={props.dashSizes}
               priorities={props.priorities}
               key={req.id}
+              editTask={props.editTask}
             />
           ))}
         </div>
@@ -87,7 +87,15 @@ const Tasks = (props) => {
       )}
 
       {props.isEditFormOn && (
-        <UpdateTask right={right} editTaskData={props.editTaskData} />
+        <UpdateTask
+          right={right}
+          editTaskData={props.editTaskData}
+          editTaskId={props.editTaskId}
+          statuses={props.statuses}
+          managers={props.managers}
+          updateTask={props.updateTask}
+          setEditFormOff={props.setEditFormOff}
+        />
       )}
     </div>
   );
@@ -99,9 +107,16 @@ const mstp = (state) => ({
   dashSizes: state.ui.requests.dashSizes,
   dashData: state.tasks.requests,
   priorities: state.tasks.priorities,
+  statuses: state.tasks.statuses,
+  managers: state.tasks.managers,
   editTaskId: state.tasks.editTaskId,
   isEditFormOn: state.tasks.isEditFormOn,
   editTaskData: state.tasks.editTaskData,
 });
 
-export const TasksCont = connect(mstp, { createTask, editTask })(Tasks);
+export const TasksCont = connect(mstp, {
+  createTask,
+  editTask,
+  updateTask,
+  setEditFormOff,
+})(Tasks);

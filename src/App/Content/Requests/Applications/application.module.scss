@@ -13,6 +13,7 @@
   font-family: "Roboto", serif;
   font-size: 16px;
   font-weight: 300;
+  cursor: pointer;
   .priority {
     @include align;
     padding-left: 3px;
@@ -49,5 +50,8 @@
   }
   .manager {
     @include align;
+  }
+  &:hover {
+    background-color: $ui4;
   }
 }
