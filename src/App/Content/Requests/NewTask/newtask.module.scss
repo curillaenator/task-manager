@@ -64,9 +64,15 @@
       & > p {
         @include title;
       }
-      & > textarea {
-        @include textarea;
-        height: 85px;
+      .textarea {
+        & > textarea {
+          @include textarea;
+          height: 85px;
+        }
+        & > p {
+          font-size: 10px;
+          color: $textDanger;
+        }
       }
     }
     .description {
@@ -75,9 +81,15 @@
       & > p {
         @include title;
       }
-      & > textarea {
-        @include textarea;
-        height: 134px;
+      .textarea {
+        & > textarea {
+          @include textarea;
+          height: 134px;
+        }
+        & > p {
+          font-size: 10px;
+          color: $textDanger;
+        }
       }
     }
   }

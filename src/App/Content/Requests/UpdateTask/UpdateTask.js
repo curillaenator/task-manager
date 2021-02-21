@@ -5,12 +5,11 @@ const UpdateTask = (props) => {
   const onSubmitUpdate = (formData) => {
     formData.id = props.editTaskId;
     props.updateTask(formData);
-    console.log(formData);
   };
   return (
     <Form
       onSubmit={onSubmitUpdate}
-      render={({ handleSubmit, values, form, pristine }) => (
+      render={({ handleSubmit, form }) => (
         <FormUpdate
           toggleCreateForm={props.toggleCreateForm}
           handleSubmit={handleSubmit}
@@ -19,8 +18,6 @@ const UpdateTask = (props) => {
           statuses={props.statuses}
           managers={props.managers}
           setEditFormOff={props.setEditFormOff}
-          // values={values}
-          // pristine={pristine}
         />
       )}
     />
