@@ -3,7 +3,7 @@ import { Button } from "../../../UICommon/Button/Button";
 import close from "../../../../Assets/Icons/close.png";
 import styles from "./newtask.module.scss";
 
-const FormCreate = ({right, ...props}) => {
+const FormCreate = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
@@ -14,7 +14,6 @@ const FormCreate = ({right, ...props}) => {
     <form
       onSubmit={props.handleSubmit}
       className={styles.newTask}
-      style={{ right }}
     >
       <div className={styles.formTitle}>
         <h2>Новая заявка</h2>

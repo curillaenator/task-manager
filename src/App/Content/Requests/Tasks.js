@@ -33,21 +33,6 @@ const Tasks = (props) => {
   const [isCreateForm, setCreateForm] = useState(false);
   const toggleCreateForm = () => setCreateForm(!isCreateForm);
 
-  const posCalc = () =>
-    (window.innerWidth - 1600) / 2 < 0
-      ? window.innerWidth - 1600
-      : (window.innerWidth - 1600) / 2;
-
-  const [right, setRight] = useState(posCalc());
-
-  useEffect(() => {
-    isCreateForm || props.isEditFormOn
-      ? window.addEventListener("resize", () => setRight(posCalc()))
-      : window.removeEventListener("resize", () => setRight(posCalc()));
-    return () =>
-      window.removeEventListener("resize", () => setRight(posCalc()));
-  }, [isCreateForm, props.isEditFormOn]);
-
   return (
     <div className={styles.applications}>
       <div className={styles.buttons}>
@@ -82,13 +67,11 @@ const Tasks = (props) => {
         <NewTask
           toggleCreateForm={toggleCreateForm}
           createTask={props.createTask}
-          right={right}
         />
       )}
 
       {props.isEditFormOn && (
         <UpdateTask
-          right={right}
           editTaskData={props.editTaskData}
           editTaskId={props.editTaskId}
           statuses={props.statuses}

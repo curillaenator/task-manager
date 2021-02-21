@@ -80,7 +80,8 @@ export const editTask = (id) => async (dispatch) => {
 
 export const updateTask = (updateData) => async (dispatch) => {
   await api.updateTask(updateData);
-  dispatch(setEditFormOff());
   const tasks = await api.getTasks();
   dispatch(setTasks(tasks));
+  const taskToEdit = await api.getTaskToEdit(updateData.id);
+  dispatch(setEditTaskData(taskToEdit));
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Field } from "react-final-form";
 import { Button } from "../../../UICommon/Button/Button";
 import avatar from "../../../../Assets/Images/Avatar.jpg";
@@ -68,10 +68,14 @@ const Descriptions = ({ editTaskData, ...props }) => {
   );
 };
 
-const Status = ({ statuses, statusId }) => {
-  const [dot, setDot] = useState(statuses.find((s) => s.id === statusId).rgb);
-  const dotStyleHandler = (e) =>
+const Status = ({ statuses, statusId, submit, statusRgb }) => {
+  const [dot, setDot] = useState("#ecf3f7");
+  useEffect(() => setDot(statusRgb), [statusRgb]);
+  
+  const statusHandler = (e) => {
     setDot(statuses.find((s) => s.id === +e.target.value).rgb);
+    submit();
+  };
 
   return (
     <div className={styles.status}>
@@ -79,8 +83,8 @@ const Status = ({ statuses, statusId }) => {
       <Field
         name="statusId"
         component="select"
-        initialValue={statusId}
-        onClick={dotStyleHandler}
+        defaultValue={statusId}
+        onClick={statusHandler}
       >
         {statuses.map((s) => (
           <option value={s.id} key={s.id}>
@@ -92,12 +96,16 @@ const Status = ({ statuses, statusId }) => {
   );
 };
 
-const Manager = ({ managers, manager }) => {
-  //   console.log(managers);
+const Manager = ({ managers, manager, submit }) => {
   return (
     <div className={styles.manager}>
       <h3>Исполнитель</h3>
-      <Field name="executorId" component="select" initialValue={manager}>
+      <Field
+        name="executorId"
+        component="select"
+        defaultValue={manager}
+        onClick={submit}
+      >
         {managers.map((m) => (
           <option value={m.id} key={m.id}>
             {m.name}
@@ -120,6 +128,8 @@ const Edits = (props) => {
       <Status
         statuses={props.statuses}
         statusId={props.editTaskData.statusId}
+        statusRgb={props.editTaskData.statusRgb}
+        submit={props.submit}
       />
 
       <div className={styles.issuer}>
@@ -135,6 +145,7 @@ const Edits = (props) => {
       <Manager
         managers={props.managers}
         manager={props.editTaskData.executorId}
+        submit={props.submit}
       />
 
       <div className={styles.priotity}>
@@ -163,15 +174,17 @@ const Edits = (props) => {
   );
 };
 
-const FormUpdate = ({ right, editTaskData, ...props }) => {
-  //   console.log(props);
-  const submit = () => {};
+const FormUpdate = ({ editTaskData, ...props }) => {
+  const submitComment = (e) => {
+    e.preventDefault();
+    props.form.submit();
+    props.form.change("comment", "");
+  };
 
   return (
     <form
       onSubmit={props.handleSubmit}
       className={styles.updateTask}
-      style={{ right }}
     >
       <div className={styles.formTitle}>
         <div className={styles.formInfo}>
@@ -182,11 +195,12 @@ const FormUpdate = ({ right, editTaskData, ...props }) => {
       </div>
 
       <div className={styles.formBody}>
-        <Descriptions submit={submit} editTaskData={editTaskData} />
+        <Descriptions submit={submitComment} editTaskData={editTaskData} />
         <Edits
           editTaskData={editTaskData}
           statuses={props.statuses}
           managers={props.managers}
+          submit={props.form.submit}
         />
       </div>
     </form>

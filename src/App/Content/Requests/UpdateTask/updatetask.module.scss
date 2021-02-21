@@ -45,8 +45,8 @@
 }
 
 .updateTask {
-  position: fixed;
-  top: 65px;
+  position: absolute;
+  top: 0;
   right: 0;
   width: 976px;
   border-left: 1px solid $ui3;
