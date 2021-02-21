@@ -12,35 +12,29 @@ const Priority = ({ priorities, width, priorityId }) => {
   );
 };
 
-const Id = ({ id, width }) => {
-  return (
-    <div className={styles.id} style={{ width }}>
-      {new Intl.NumberFormat("ru-RU").format(id)}
-    </div>
-  );
-};
+const Id = ({ id, width }) => (
+  <div className={styles.id} style={{ width }}>
+    {new Intl.NumberFormat("ru-RU").format(id)}
+  </div>
+);
 
-const Name = ({ name, width }) => {
-  return (
-    <div className={styles.name} style={{ width }}>
-      <p>{name}</p>
-    </div>
-  );
-};
+const Name = ({ name, width }) => (
+  <div className={styles.name} style={{ width }}>
+    <p>{name}</p>
+  </div>
+);
 
-const Status = ({ width, rgb, status }) => {
-  return (
-    <div className={styles.status} style={{ width }}>
-      <div className={styles.bar} style={{ backgroundColor: rgb }}>
-        {status}
-      </div>
+const Status = ({ width, rgb, status }) => (
+  <div className={styles.status} style={{ width }}>
+    <div className={styles.bar} style={{ backgroundColor: rgb }}>
+      {status}
     </div>
-  );
-};
+  </div>
+);
 
-const Manager = ({ manager }) => {
-  return <div className={styles.manager}>{manager}</div>;
-};
+const Manager = ({ manager }) => (
+  <div className={styles.manager}>{manager}</div>
+);
 
 export const Application = ({ priorities, dashSizes, data, editTask }) => {
   const editTaskHandler = () => editTask(data.id);

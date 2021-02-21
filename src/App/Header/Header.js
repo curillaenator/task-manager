@@ -1,4 +1,4 @@
-import Avatar from "../../Assets/Images/Avatar.jpg";
+import Arturov from "../../Assets/Images/Arturov.jpg";
 
 import styles from "./header.module.scss";
 
@@ -10,7 +10,7 @@ const Header = (props) => {
       </div>
       <div className={styles.avatar}>
         <p>Артуров Кирилл</p>
-        <img src={Avatar} alt="Аватар" />
+        <img src={Arturov} alt="Аватар" />
       </div>
     </header>
   );

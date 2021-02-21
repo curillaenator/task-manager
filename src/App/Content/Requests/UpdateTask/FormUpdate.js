@@ -18,7 +18,7 @@ const Comment = ({ item }) => {
     <div className={styles.comment}>
       <div className={styles.title}>
         <div className={styles.avatar}>
-          <img src={avatar} alt={item.userName} />
+          <img src={avatar} alt={item.userName} /> 
         </div>
 
         <div className={styles.misc}>
@@ -35,7 +35,7 @@ const Comment = ({ item }) => {
   );
 };
 
-const Descriptions = ({ editTaskData, ...props }) => {
+const Descriptions = ({ editTaskData, submit }) => {
   return (
     <div className={styles.descriptions}>
       <div className={styles.descr}>
@@ -54,7 +54,7 @@ const Descriptions = ({ editTaskData, ...props }) => {
           title="Сохранить"
           width="150px"
           height="35px"
-          handler={props.submit}
+          handler={submit}
         />
       </div>
       <div className={styles.commentaries}>
@@ -68,13 +68,16 @@ const Descriptions = ({ editTaskData, ...props }) => {
   );
 };
 
-const Status = ({ statuses, statusId, submit, statusRgb }) => {
+const Status = ({ statuses, statusId, statusRgb, form }) => {
   const [dot, setDot] = useState("#ecf3f7");
   useEffect(() => setDot(statusRgb), [statusRgb]);
-  
+
   const statusHandler = (e) => {
+    const comment = form.getFieldState("comment").value;
+    form.change("comment", undefined);
+    form.submit();
+    form.change("comment", comment);
     setDot(statuses.find((s) => s.id === +e.target.value).rgb);
-    submit();
   };
 
   return (
@@ -96,7 +99,14 @@ const Status = ({ statuses, statusId, submit, statusRgb }) => {
   );
 };
 
-const Manager = ({ managers, manager, submit }) => {
+const Manager = ({ managers, manager, form }) => {
+
+  const managerHandler = () => {
+    const comment = form.getFieldState("comment").value;
+    form.change("comment", undefined);
+    form.submit();
+    form.change("comment", comment);
+  }
   return (
     <div className={styles.manager}>
       <h3>Исполнитель</h3>
@@ -104,7 +114,7 @@ const Manager = ({ managers, manager, submit }) => {
         name="executorId"
         component="select"
         defaultValue={manager}
-        onClick={submit}
+        onClick={managerHandler}
       >
         {managers.map((m) => (
           <option value={m.id} key={m.id}>
@@ -129,7 +139,7 @@ const Edits = (props) => {
         statuses={props.statuses}
         statusId={props.editTaskData.statusId}
         statusRgb={props.editTaskData.statusRgb}
-        submit={props.submit}
+        form={props.form}
       />
 
       <div className={styles.issuer}>
@@ -145,7 +155,7 @@ const Edits = (props) => {
       <Manager
         managers={props.managers}
         manager={props.editTaskData.executorId}
-        submit={props.submit}
+        form={props.form}
       />
 
       <div className={styles.priotity}>
@@ -174,18 +184,15 @@ const Edits = (props) => {
   );
 };
 
-const FormUpdate = ({ editTaskData, ...props }) => {
+const FormUpdate = ({ editTaskData, form, ...props }) => {
   const submitComment = (e) => {
     e.preventDefault();
-    props.form.submit();
-    props.form.change("comment", "");
+    form.submit();
+    form.change("comment", undefined);
   };
 
   return (
-    <form
-      onSubmit={props.handleSubmit}
-      className={styles.updateTask}
-    >
+    <form onSubmit={props.handleSubmit} className={styles.updateTask}>
       <div className={styles.formTitle}>
         <div className={styles.formInfo}>
           <h2>№ {new Intl.NumberFormat("ru-RU").format(editTaskData.id)}</h2>
@@ -200,7 +207,8 @@ const FormUpdate = ({ editTaskData, ...props }) => {
           editTaskData={editTaskData}
           statuses={props.statuses}
           managers={props.managers}
-          submit={props.form.submit}
+          submit={form.submit}
+          form={form}
         />
       </div>
     </form>

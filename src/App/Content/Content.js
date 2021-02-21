@@ -8,6 +8,7 @@ const SimpleC = (props) => (
 const Content = () => {
   return (
     <>
+      <Route exact path="/" render={() => <TasksCont />} />
       <Route path="/requests" render={() => <TasksCont />} />
       <Route path="/knowledge" render={() => <SimpleC title="База знаний" />} />
       <Route path="/employees" render={() => <SimpleC title="Сотрудники" />} />
