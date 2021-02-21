@@ -1,16 +1,16 @@
 import { api } from "../../api";
 import { initialize } from "./appReducer";
 
-const SET_TASKS = "requestsReducer/SET_TASKS";
-const SET_PRIORITIES = "requestsReducer/SET_PRIORITIES";
-const SET_STATUSES = "requestsReducer/SET_STATUSES";
-const SET_EDIT_TASKID = "requestsReducer/SET_EDIT_TASKID";
-const SET_EDIT_TASKDATA = "requestsReducer/SET_EDIT_TASKDATA";
-const SET_EDIT_FORM_OFF = "requestsReducer/SET_EDIT_FORM_OFF";
-const SET_MANAGERS = "requestsReducer/SET_MANAGERS";
+const SET_TASKS = "tasksReducer/SET_TASKS";
+const SET_PRIORITIES = "tasksReducer/SET_PRIORITIES";
+const SET_STATUSES = "tasksReducer/SET_STATUSES";
+const SET_EDIT_TASKID = "tasksReducer/SET_EDIT_TASKID";
+const SET_EDIT_TASKDATA = "tasksReducer/SET_EDIT_TASKDATA";
+const SET_EDIT_FORM_OFF = "tasksReducer/SET_EDIT_FORM_OFF";
+const SET_MANAGERS = "tasksReducer/SET_MANAGERS";
 
 const initialState = {
-  requests: [],
+  tasks: [],
   priorities: [],
   statuses: [],
   managers: [],
@@ -22,7 +22,7 @@ const initialState = {
 export const tasks = (state = initialState, action) => {
   switch (action.type) {
     case SET_TASKS:
-      return { ...state, requests: action.payload };
+      return { ...state, tasks: action.payload };
     case SET_PRIORITIES:
       return { ...state, priorities: action.payload };
     case SET_STATUSES:

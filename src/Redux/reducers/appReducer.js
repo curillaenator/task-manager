@@ -2,6 +2,7 @@ const INITIALIZE = "appReducer/INITIALIZE";
 
 const initialState = {
   isInitialized: false,
+  isLoading: false,
 };
 
 export const app = (state = initialState, action) => {

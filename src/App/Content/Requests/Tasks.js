@@ -85,10 +85,11 @@ const Tasks = (props) => {
 };
 
 const mstp = (state) => ({
-  newTask: state.ui.requests.newTask,
-  dashNames: state.ui.requests.dashNames,
-  dashSizes: state.ui.requests.dashSizes,
-  dashData: state.tasks.requests,
+  newTask: state.ui.tasks.newTask, 
+  saveComment: state.ui.tasks.saveComment, 
+  dashNames: state.ui.tasks.dashNames, 
+  dashSizes: state.ui.tasks.dashSizes,
+  dashData: state.tasks.tasks,
   priorities: state.tasks.priorities,
   statuses: state.tasks.statuses,
   managers: state.tasks.managers,

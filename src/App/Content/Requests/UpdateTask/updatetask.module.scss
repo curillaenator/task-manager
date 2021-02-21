@@ -1,7 +1,6 @@
 @import "../../../../palette.scss";
 
 @mixin title {
-  padding-left: 5px;
   color: $textGray;
   font-family: "Ubuntu", serif;
   font-size: 14px;
@@ -193,8 +192,7 @@
       .issuer,
       .creator,
       .priotity,
-      .expiry,
-      .tags {
+      .expiry {
         margin-bottom: 30px;
         & > h3 {
           @include text;
@@ -227,6 +225,23 @@
         & > select {
           @include select;
           padding-left: 0;
+        }
+      }
+      .tags {
+        & > h3 {
+          @include text;
+          color: $textGray;
+          margin-bottom: 12px;
+        }
+        .tag {
+          height: 20px;
+          width: fit-content;
+          margin-bottom: 5px;
+          padding: 0 9px;
+          border: 1px solid $tags;
+          border-radius: 10px;
+          background-color: $textWhite;
+          color: $tags;
         }
       }
     }

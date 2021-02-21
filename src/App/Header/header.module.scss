@@ -9,6 +9,7 @@
   padding: 0 17px;
   background-color: $headerBG;
   .search {
+    position: relative;
     flex-grow: 0;
     flex-shrink: 0;
     width: 680px;
@@ -20,7 +21,13 @@
       border: 1px solid $primary;
       border-radius: 19px;
       outline: none;
-      padding: 8px;
+      padding: 0 36px 0 17px;
+    }
+    & > img {
+      position: absolute;
+      bottom: 11px;
+      right: 13px;
+      width: 19px;
     }
   }
   .avatar {

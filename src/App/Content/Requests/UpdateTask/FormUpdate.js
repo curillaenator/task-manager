@@ -18,7 +18,7 @@ const Comment = ({ item }) => {
     <div className={styles.comment}>
       <div className={styles.title}>
         <div className={styles.avatar}>
-          <img src={avatar} alt={item.userName} /> 
+          <img src={avatar} alt={item.userName} />
         </div>
 
         <div className={styles.misc}>
@@ -46,7 +46,7 @@ const Descriptions = ({ editTaskData, submit }) => {
       <Field
         name="comment"
         component="textarea"
-        placeholder="Добавление комментария"
+        placeholder="Добавление комментариев"
       />
 
       <div className={styles.save}>
@@ -100,13 +100,12 @@ const Status = ({ statuses, statusId, statusRgb, form }) => {
 };
 
 const Manager = ({ managers, manager, form }) => {
-
   const managerHandler = () => {
     const comment = form.getFieldState("comment").value;
     form.change("comment", undefined);
     form.submit();
     form.change("comment", comment);
-  }
+  };
   return (
     <div className={styles.manager}>
       <h3>Исполнитель</h3>
@@ -178,7 +177,9 @@ const Edits = (props) => {
 
       <div className={styles.tags}>
         <h3>Тэги</h3>
-        <p>апывпывпы</p>
+        {props.editTaskData.tags.map((t) => (
+          <div className={styles.tag}>{t.name}</div>
+        ))}
       </div>
     </div>
   );
