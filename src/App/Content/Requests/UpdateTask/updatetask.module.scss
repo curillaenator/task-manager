@@ -99,19 +99,22 @@
     .descriptions {
       width: 698px;
       padding-top: 26px;
-      // padding-bottom: 26px;
       flex-shrink: 0;
       padding-right: 32px;
       box-sizing: border-box;
-
       .descr {
         margin-bottom: 45px;
+        overflow: hidden;
         & > h3 {
           @include title;
         }
         & > p {
           @include text;
-          height: 90px;
+          max-height: 90px;
+          display: -webkit-box;
+          -webkit-line-clamp: 5;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       }
       & > textarea {

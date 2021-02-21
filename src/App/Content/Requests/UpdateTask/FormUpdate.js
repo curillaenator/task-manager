@@ -178,7 +178,7 @@ const Edits = (props) => {
       <div className={styles.tags}>
         <h3>Тэги</h3>
         {props.editTaskData.tags.map((t) => (
-          <div className={styles.tag}>{t.name}</div>
+          <div className={styles.tag} key={t.id}>{t.name}</div>
         ))}
       </div>
     </div>
