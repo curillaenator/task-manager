@@ -102,15 +102,16 @@
       flex-shrink: 0;
       padding-right: 32px;
       box-sizing: border-box;
+      position: relative;
       .descr {
-        margin-bottom: 45px;
+        position: absolute;
         overflow: hidden;
+        padding-right: 32px;
         & > h3 {
           @include title;
         }
         & > p {
           @include text;
-          max-height: 90px;
           display: -webkit-box;
           -webkit-line-clamp: 5;
           -webkit-box-orient: vertical;
@@ -119,6 +120,7 @@
       }
       & > textarea {
         @include textarea;
+        margin-top: 162px;
         height: 85px;
         margin-bottom: 15px;
         &::placeholder {
@@ -132,7 +134,7 @@
         margin-bottom: 45px;
       }
       .commentaries {
-        max-height: 324px;
+        max-height: 316px;
         overflow-y: auto;
         .comment {
           margin-bottom: 16px;
