@@ -42,9 +42,13 @@ export const Application = ({
   dashSizes,
   data,
   editTask,
+  setCreateForm,
   statuses,
 }) => {
-  const editTaskHandler = () => editTask(data.id);
+  const editTaskHandler = () => {
+    setCreateForm(false);
+    editTask(data.id);
+  };
   return (
     <div className={styles.application} onClick={editTaskHandler}>
       <Priority
