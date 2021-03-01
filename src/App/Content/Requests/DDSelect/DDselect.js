@@ -3,7 +3,13 @@ import { Field } from "react-final-form";
 import arrow from "../../../../Assets/Icons/arrow.png";
 import styles from "./ddselect.module.scss";
 
-const FakeList = ({ options, fakeHandler }) => {
+const FakeList = ({ options, fakeHandler, mode, setMode }) => {
+  const setModeFalse = () => setMode(false);
+  useEffect(() => {
+    document.addEventListener("click", setModeFalse);
+    return () => document.removeEventListener("click", setModeFalse);
+  });
+
   return (
     <div className={styles.list}>
       {options.map((o) => (
@@ -54,7 +60,14 @@ export const DDSelect = ({ name, selected, options, form, dotRgb }) => {
         <img src={arrow} alt="Выбрать" style={arrowStyle} />
       </div>
 
-      {mode && <FakeList options={options} fakeHandler={fakeHandler} />}
+      {mode && (
+        <FakeList
+          options={options}
+          fakeHandler={fakeHandler}
+          mode={mode}
+          setMode={setMode}
+        />
+      )}
     </div>
   );
 };

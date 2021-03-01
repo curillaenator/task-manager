@@ -43,7 +43,6 @@ export const Application = ({
   data,
   editTask,
   setCreateForm,
-  statuses,
 }) => {
   const editTaskHandler = () => {
     setCreateForm(false);
