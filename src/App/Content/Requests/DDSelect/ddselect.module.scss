@@ -34,7 +34,7 @@
   }
   .list {
     position: absolute;
-    top: -7px;
+    top: calc(100% + 12px);
     left: 0;
     & > button {
       width: 100%;

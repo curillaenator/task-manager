@@ -63,6 +63,8 @@ const Tasks = (props) => {
                 statuses={props.statuses}
                 key={req.id}
                 editTask={props.editTask}
+                isCreateForm={isCreateForm}
+                isEditFormOn={props.isEditFormOn}
                 setCreateForm={setCreateForm}
               />
             ))}

@@ -5,7 +5,7 @@ import clients from "../../Assets/Icons/clients.png";
 import employees from "../../Assets/Icons/employees.png";
 import settings from "../../Assets/Icons/settings.png";
 
-// Использую стейт (через создание редюсера) для хранения параметров 
+// Использую стейт (через создание редюсера) для хранения параметров
 // элементов UI в одном месте
 
 const initialState = {

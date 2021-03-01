@@ -33,8 +33,10 @@ const Status = ({ width, rgb, status }) => (
   </div>
 );
 
-const Manager = ({ manager }) => (
-  <div className={styles.manager}>{manager}</div>
+const Manager = ({ width, manager }) => (
+  <div className={styles.manager} style={{ width }}>
+    <p>{manager}</p>
+  </div>
 );
 
 export const Application = ({
@@ -43,11 +45,16 @@ export const Application = ({
   data,
   editTask,
   setCreateForm,
+  isCreateForm,
+  isEditFormOn,
 }) => {
   const editTaskHandler = () => {
     setCreateForm(false);
     editTask(data.id);
   };
+
+  const managerStyle =
+    isCreateForm || isEditFormOn ? dashSizes.manager : "calc(100% - 736px)";
   return (
     <div className={styles.application} onClick={editTaskHandler}>
       <Priority
@@ -63,7 +70,7 @@ export const Application = ({
         rgb={data.statusRgb}
         status={data.statusName}
       />
-      <Manager manager={data.executorName} />
+      <Manager manager={data.executorName} width={managerStyle} />
     </div>
   );
 };

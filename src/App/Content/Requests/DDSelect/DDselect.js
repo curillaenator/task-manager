@@ -3,7 +3,7 @@ import { Field } from "react-final-form";
 import arrow from "../../../../Assets/Icons/arrow.png";
 import styles from "./ddselect.module.scss";
 
-const FakeList = ({ options, fakeHandler, mode, setMode }) => {
+const FakeList = ({ options, fakeHandler, setMode }) => {
   const setModeFalse = () => setMode(false);
   useEffect(() => {
     document.addEventListener("click", setModeFalse);
@@ -35,15 +35,14 @@ export const DDSelect = ({ name, selected, options, form, dotRgb }) => {
     form.change("comment", comment);
   };
 
-  const fakeHandler = async (e) => {
+  const fakeHandler = (e) => {
     e.preventDefault();
-    await form.change(name, e.target.value);
-    await submitHandler();
+    form.change(name, e.target.value);
+    submitHandler();
     modeHandler();
   };
 
   const arrowStyle = mode ? { transform: "rotate(180deg)" } : {};
-  const displayStyle = mode ? { fontWeight: "800" } : {};
 
   return (
     <div className={styles.select}>
@@ -54,9 +53,7 @@ export const DDSelect = ({ name, selected, options, form, dotRgb }) => {
       <Field name={name} component="input" defaultValue={selected} />
 
       <div className={styles.display} onClick={modeHandler}>
-        <p style={displayStyle}>
-          {options.find((o) => o.id === selected).name}
-        </p>
+        <p>{options.find((o) => o.id === selected).name}</p>
         <img src={arrow} alt="Выбрать" style={arrowStyle} />
       </div>
 
@@ -64,7 +61,6 @@ export const DDSelect = ({ name, selected, options, form, dotRgb }) => {
         <FakeList
           options={options}
           fakeHandler={fakeHandler}
-          mode={mode}
           setMode={setMode}
         />
       )}

@@ -5,12 +5,11 @@
   align-items: center;
   padding-left: 16px;
   flex-shrink: 0;
+  border-bottom: 1px solid $ui1;
 }
 .application {
   display: flex;
-  width: 100%;
   height: 55px;
-  border-bottom: 1px solid $ui1;
   font-family: "Roboto", serif;
   font-size: 16px;
   font-weight: 300;
@@ -52,7 +51,11 @@
   .manager {
     @include align;
   }
-  &:hover {
+  &:hover .priority,
+  &:hover .status,
+  &:hover .name,
+  &:hover .id,
+  &:hover .manager {
     background-color: $ui4;
   }
 }
