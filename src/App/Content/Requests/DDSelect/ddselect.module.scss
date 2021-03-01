@@ -1,0 +1,30 @@
+@import "../../../../palette.scss";
+
+@mixin select {
+  display: block;
+  width: 100%;
+  outline: none;
+  padding-left: 8px;
+  border: none;
+  background: transparent;
+  font-family: "Roboto", serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: $textDark;
+  cursor: pointer;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  margin-bottom: 38px;
+  .dot {
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: yellowgreen;
+  }
+  & > select {
+    @include select;
+  }
+}

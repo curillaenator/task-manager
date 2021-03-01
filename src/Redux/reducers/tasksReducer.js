@@ -7,6 +7,7 @@ const SET_STATUSES = "tasksReducer/SET_STATUSES";
 const SET_EDIT_TASKID = "tasksReducer/SET_EDIT_TASKID";
 const SET_EDIT_TASKDATA = "tasksReducer/SET_EDIT_TASKDATA";
 const SET_EDIT_FORM_OFF = "tasksReducer/SET_EDIT_FORM_OFF";
+const SET_NEW_FORM_OFF = "tasksReducer/SET_NEW_FORM_OFF";
 const SET_MANAGERS = "tasksReducer/SET_MANAGERS";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   editTaskId: null,
   editTaskData: null,
   isEditFormOn: false,
+  isNewFormOn: false,
 };
 
 export const tasks = (state = initialState, action) => {
@@ -33,6 +35,8 @@ export const tasks = (state = initialState, action) => {
       return { ...state, editTaskData: action.payload };
     case SET_EDIT_FORM_OFF:
       return { ...state, editTaskId: null, isEditFormOn: false };
+    case SET_NEW_FORM_OFF:
+      return { ...state, isNewFormOn: action.formOn };
     case SET_MANAGERS:
       return { ...state, managers: action.payload };
     default:

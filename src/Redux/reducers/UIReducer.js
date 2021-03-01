@@ -25,7 +25,7 @@ const initialState = {
       id: "80px",
       name: "420px",
       status: "125px",
-      manager: "",
+      manager: "420px",
     }, // ширины полей в списке заявок
     dashNames: [
       { name: "priority", title: "" },

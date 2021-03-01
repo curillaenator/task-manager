@@ -30,3 +30,17 @@
     background-color: $activated;
   }
 }
+.disabled {
+  background-color: $disabled;
+  border: 2px solid $disabledBorder;
+  cursor: default;
+  & > p {
+    color: $disabledBorder;
+  }
+  &:hover {
+    background-color: $disabled;
+  }
+  &:active {
+    background-color: $disabled;
+  }
+}

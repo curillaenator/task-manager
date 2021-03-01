@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Field } from "react-final-form";
 import { Button } from "../../../UICommon/Button/Button";
+import { DDSelect } from "../DDSelect/DDselect";
 import avatar from "../../../../Assets/Images/Avatar.jpg";
 import close from "../../../../Assets/Icons/close.png";
 import styles from "./updatetask.module.scss";
@@ -68,37 +69,6 @@ const Descriptions = ({ editTaskData, submit }) => {
   );
 };
 
-const Status = ({ statuses, statusId, statusRgb, form }) => {
-  const [dot, setDot] = useState("#ecf3f7");
-  useEffect(() => setDot(statusRgb), [statusRgb]);
-
-  const statusHandler = (e) => {
-    const comment = form.getFieldState("comment").value;
-    form.change("comment", undefined);
-    form.submit();
-    form.change("comment", comment);
-    setDot(statuses.find((s) => s.id === +e.target.value).rgb);
-  };
-
-  return (
-    <div className={styles.status}>
-      <div className={styles.dot} style={{ backgroundColor: dot }}></div>
-      <Field
-        name="statusId"
-        component="select"
-        defaultValue={statusId}
-        onClick={statusHandler}
-      >
-        {statuses.map((s) => (
-          <option value={s.id} key={s.id}>
-            {s.name}
-          </option>
-        ))}
-      </Field>
-    </div>
-  );
-};
-
 const Manager = ({ managers, manager, form }) => {
   const managerHandler = () => {
     const comment = form.getFieldState("comment").value;
@@ -131,14 +101,14 @@ const Edits = (props) => {
     month: "numeric",
     day: "numeric",
   };
-
+  console.log(props.editTaskData);
   return (
     <div className={styles.edits}>
-      <Status
-        statuses={props.statuses}
-        statusId={props.editTaskData.statusId}
-        statusRgb={props.editTaskData.statusRgb}
+      <DDSelect
+        selected={props.editTaskData.statusId}
+        options={props.statuses}
         form={props.form}
+        statusRgb={props.editTaskData.statusRgb}
       />
 
       <div className={styles.issuer}>
@@ -152,8 +122,8 @@ const Edits = (props) => {
       </div>
 
       <Manager
-        managers={props.managers}
         manager={props.editTaskData.executorId}
+        managers={props.managers}
         form={props.form}
       />
 
@@ -178,7 +148,9 @@ const Edits = (props) => {
       <div className={styles.tags}>
         <h3>Тэги</h3>
         {props.editTaskData.tags.map((t) => (
-          <div className={styles.tag} key={t.id}>{t.name}</div>
+          <div className={styles.tag} key={t.id}>
+            {t.name}
+          </div>
         ))}
       </div>
     </div>

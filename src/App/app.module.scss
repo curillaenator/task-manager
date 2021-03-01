@@ -2,11 +2,14 @@
   display: flex;
   justify-content: space-between;
   width: 1600px;
+  // max-width: 1600px;
+  height: 100vh;
   margin: 0 auto;
   position: relative;
   .content {
     width: 100%;
-    height: fit-content;
+    max-width: calc(1600px - 95px);
+    // height: fit-content;
   }
   .loader {
     position: absolute;

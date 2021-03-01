@@ -1,13 +1,21 @@
 import styles from "./button.module.scss";
 
-export const Button = ({ title, width, height, handler, clicked }) => {
-  const handleClick = handler ? handler : () => {};
-  const btnCss = clicked
+export const Button = (props) => {
+  const handleClick = props.handler ? props.handler : () => {};
+  const btnCss = props.disabled
+    ? `${styles.button} ${styles.disabled}`
+    : props.clicked
     ? `${styles.button} ${styles.activated}`
     : styles.button;
+
   return (
-    <button className={btnCss} style={{ width, height }} onClick={handleClick}>
-      <p>{title}</p>
+    <button
+      className={btnCss}
+      style={{ width: props.width, height: props.height }}
+      onClick={handleClick}
+      disabled={props.disabled}
+    >
+      <p>{props.title}</p>
     </button>
   );
 };

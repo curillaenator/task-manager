@@ -1,42 +1,49 @@
 @import "../../../palette.scss";
 
 .applications {
-  max-height: calc(850px - 65px);
-  position: relative;
-  .buttons {
+  display: flex;
+  width: 100%;
+  .list {
     width: 100%;
-    height: 75px;
-    padding-top: 25px;
-    padding-left: 262px;
-  }
-  .dashboard {
-    width: 100%;
-    .naming {
-      display: flex;
+    .buttons {
       width: 100%;
-      height: 46px;
-      border-bottom: 1px solid $ui2;
-      .item {
+      height: 75px;
+      padding-top: 25px;
+      padding-left: 262px;
+    }
+    .dashboard {
+      overflow: auto;
+      height: calc(100vh - 140px);
+      .naming {
         display: flex;
-        align-items: center;
-        & > p {
-          padding-left: 16px;
-          border-left: 1px solid $ui1;
-
-          font-family: "Ubuntu", sarif;
-          font-size: 16px;
-        }
-        &:first-child {
+        width: 100%;
+        height: 46px;
+        border-bottom: 1px solid $ui2;
+        .item {
+          display: flex;
+          flex-shrink: 0;
+          align-items: center;
           & > p {
-            border-left: none;
+            padding-left: 16px;
+            border-left: 1px solid $ui1;
+            font-family: "Ubuntu", sarif;
+            font-size: 16px;
+          }
+          &:first-child {
+            & > p {
+              border-left: none;
+            }
           }
         }
       }
     }
+    .listing {
+      width: 100%;
+      max-height: calc(100vh - 186px);
+      position: relative;
+    }
   }
-  .listing {
-    max-height: calc(850px - 185px);
-    position: relative;
-    overflow: auto;
+  .forms {
+    // position: relative;
   }
 }

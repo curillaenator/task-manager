@@ -1,12 +1,13 @@
 import styles from "./application.module.scss";
 
-const Priority = ({ priorities, width, priorityId }) => {
-  const findColor = () => priorities.filter((p) => p.id === priorityId)[0];
+const Priority = ({ priorities, width, priorityId, statusRgb }) => {
+  // const findColor = () => priorities.filter((p) => p.id === priorityId)[0];
   return (
     <div className={styles.priority} style={{ width }}>
       <div
         className={styles.color}
-        style={{ backgroundColor: findColor().rgb }}
+        // style={{ backgroundColor: findColor().rgb }}
+        style={{ backgroundColor: statusRgb }}
       ></div>
     </div>
   );
@@ -36,12 +37,19 @@ const Manager = ({ manager }) => (
   <div className={styles.manager}>{manager}</div>
 );
 
-export const Application = ({ priorities, dashSizes, data, editTask }) => {
+export const Application = ({
+  priorities,
+  dashSizes,
+  data,
+  editTask,
+  statuses,
+}) => {
   const editTaskHandler = () => editTask(data.id);
   return (
     <div className={styles.application} onClick={editTaskHandler}>
       <Priority
         priorities={priorities}
+        statusRgb={data.statusRgb}
         width={dashSizes.priority}
         priorityId={data.priorityId}
       />

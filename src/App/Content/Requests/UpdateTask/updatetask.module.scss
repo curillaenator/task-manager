@@ -44,10 +44,8 @@
 }
 
 .updateTask {
-  position: absolute;
-  top: 0;
-  right: 0;
   width: 976px;
+  flex-shrink: 0;
   border-left: 1px solid $ui3;
   .formTitle {
     display: flex;
@@ -93,7 +91,8 @@
   .formBody {
     display: flex;
     width: 100%;
-    height: calc(850px - 125px);
+    // height: calc(850px - 125px);
+    height: calc(100vh - 125px);
     background-color: $form;
     padding-left: 38px;
     .descriptions {

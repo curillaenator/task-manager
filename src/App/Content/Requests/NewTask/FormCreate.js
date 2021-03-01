@@ -21,8 +21,13 @@ const FormCreate = (props) => {
     props.form.submit();
     props.values.name && props.values.description && props.toggleCreateForm();
   };
+  const formDisplay = props.display ? "none" : "block";
   return (
-    <form onSubmit={props.handleSubmit} className={styles.newTask}>
+    <form
+      onSubmit={props.handleSubmit}
+      className={styles.newTask}
+      style={{ display: formDisplay }}
+    >
       <div className={styles.formTitle}>
         <h2>Новая заявка</h2>
         <img src={close} alt="Закрыть" onClick={props.toggleCreateForm} />

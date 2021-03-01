@@ -3,7 +3,6 @@ import FormCreate from "./FormCreate";
 
 const NewTask = (props) => {
   const onSubmitCreate = (formData) => {
-    console.log("work");
     formData.resolutionDatePlan = new Date().toISOString();
     props.createTask(formData);
   };
@@ -17,6 +16,7 @@ const NewTask = (props) => {
           values={values}
           form={form}
           right={props.right}
+          display={props.display}
         />
       )}
     />
