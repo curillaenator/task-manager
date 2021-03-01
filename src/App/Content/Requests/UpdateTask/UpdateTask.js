@@ -2,13 +2,13 @@ import { Form } from "react-final-form";
 import FormUpdate from "./FormUpdate";
 
 const UpdateTask = (props) => {
-  const onSubmitUpdate = (formData) => {
+  const onSubmit = (formData) => {
     formData.id = props.editTaskId;
     props.updateTask(formData);
   };
   return (
     <Form
-      onSubmit={onSubmitUpdate}
+      onSubmit={onSubmit}
       render={({ handleSubmit, form }) => (
         <FormUpdate
           toggleCreateForm={props.toggleCreateForm}

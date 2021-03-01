@@ -69,46 +69,21 @@ const Descriptions = ({ editTaskData, submit }) => {
   );
 };
 
-const Manager = ({ managers, manager, form }) => {
-  const managerHandler = () => {
-    const comment = form.getFieldState("comment").value;
-    form.change("comment", undefined);
-    form.submit();
-    form.change("comment", comment);
-  };
-  return (
-    <div className={styles.manager}>
-      <h3>Исполнитель</h3>
-      <Field
-        name="executorId"
-        component="select"
-        defaultValue={manager}
-        onClick={managerHandler}
-      >
-        {managers.map((m) => (
-          <option value={m.id} key={m.id}>
-            {m.name}
-          </option>
-        ))}
-      </Field>
-    </div>
-  );
-};
-
 const Edits = (props) => {
   const options = {
     year: "numeric",
     month: "numeric",
     day: "numeric",
   };
-  console.log(props.editTaskData);
+
   return (
     <div className={styles.edits}>
       <DDSelect
+        name="statusId"
         selected={props.editTaskData.statusId}
         options={props.statuses}
         form={props.form}
-        statusRgb={props.editTaskData.statusRgb}
+        dotRgb={props.editTaskData.statusRgb}
       />
 
       <div className={styles.issuer}>
@@ -121,9 +96,10 @@ const Edits = (props) => {
         <p>Маркова Анна</p>
       </div>
 
-      <Manager
-        manager={props.editTaskData.executorId}
-        managers={props.managers}
+      <DDSelect
+        name="executorId"
+        selected={props.editTaskData.executorId}
+        options={props.managers}
         form={props.form}
       />
 
