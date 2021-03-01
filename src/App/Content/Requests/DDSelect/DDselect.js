@@ -27,17 +27,17 @@ export const DDSelect = ({ name, selected, options, form, dotRgb }) => {
     form.change("comment", undefined);
     form.submit();
     form.change("comment", comment);
-    // dotRgb && setDot(options.find((s) => s.id === +selected).rgb);
   };
 
   const fakeHandler = async (e) => {
     e.preventDefault();
     await form.change(name, e.target.value);
+    await submitHandler();
     modeHandler();
-    submitHandler();
   };
 
   const arrowStyle = mode ? { transform: "rotate(180deg)" } : {};
+  const displayStyle = mode ? { fontWeight: "800" } : {};
 
   return (
     <div className={styles.select}>
@@ -48,7 +48,9 @@ export const DDSelect = ({ name, selected, options, form, dotRgb }) => {
       <Field name={name} component="input" defaultValue={selected} />
 
       <div className={styles.display} onClick={modeHandler}>
-        <p>{options.find((o) => o.id === selected).name}</p>
+        <p style={displayStyle}>
+          {options.find((o) => o.id === selected).name}
+        </p>
         <img src={arrow} alt="Выбрать" style={arrowStyle} />
       </div>
 

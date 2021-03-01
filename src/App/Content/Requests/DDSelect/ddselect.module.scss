@@ -1,19 +1,5 @@
 @import "../../../../palette.scss";
 
-// @mixin select {
-//   display: block;
-//   width: 100%;
-//   outline: none;
-//   padding-left: 8px;
-//   border: none;
-//   background: transparent;
-//   font-family: "Roboto", serif;
-//   font-size: 14px;
-//   font-weight: 300;
-//   color: $textDark;
-//   cursor: pointer;
-// }
-
 .select {
   display: flex;
   align-items: center;
@@ -25,9 +11,6 @@
     height: 12px;
     margin-right: 8px;
   }
-  // & > select {
-  //   @include select;
-  // }
   & > input {
     display: none;
   }
@@ -51,7 +34,7 @@
   }
   .list {
     position: absolute;
-    top: 160%;
+    top: -7px;
     left: 0;
     & > button {
       width: 100%;

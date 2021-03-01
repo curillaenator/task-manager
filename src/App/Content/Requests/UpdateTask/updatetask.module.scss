@@ -91,7 +91,6 @@
   .formBody {
     display: flex;
     width: 100%;
-    // height: calc(850px - 125px);
     height: calc(100vh - 125px);
     background-color: $form;
     padding-left: 38px;
@@ -133,7 +132,7 @@
         margin-bottom: 45px;
       }
       .commentaries {
-        max-height: 316px;
+        height: calc(100% - 400px);
         overflow-y: auto;
         .comment {
           margin-bottom: 16px;
