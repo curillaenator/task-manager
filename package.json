@@ -4,9 +4,14 @@
   "private": true,
   "homepage": "http://curillaenator.github.io/task-manager",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.5",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
     "axios": "^0.21.1",
     "final-form": "^4.20.1",
     "node-sass": "^4.14.1",
@@ -18,6 +23,7 @@
     "react-scripts": "4.0.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "typescript": "^4.3.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

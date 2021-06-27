@@ -1,3 +1,4 @@
+import { batch } from "react-redux";
 import { api } from "../../api";
 import { initialize } from "./appReducer";
 
@@ -25,20 +26,28 @@ export const tasks = (state = initialState, action) => {
   switch (action.type) {
     case SET_TASKS:
       return { ...state, tasks: action.payload };
+
     case SET_PRIORITIES:
       return { ...state, priorities: action.payload };
+
     case SET_STATUSES:
       return { ...state, statuses: action.payload };
+
     case SET_EDIT_TASKID:
       return { ...state, editTaskId: action.id, isEditFormOn: true };
+
     case SET_EDIT_TASKDATA:
       return { ...state, editTaskData: action.payload };
+
     case SET_EDIT_FORM_OFF:
       return { ...state, editTaskId: null, isEditFormOn: false };
+
     case SET_NEW_FORM_OFF:
       return { ...state, isNewFormOn: action.formOn };
+
     case SET_MANAGERS:
       return { ...state, managers: action.payload };
+
     default:
       return state;
   }
@@ -61,31 +70,44 @@ export const setInitial = () => async (dispatch) => {
   const priors = await api.getPriorities();
   const stats = await api.getStatuses();
   const managers = await api.getManagers();
-  dispatch(setTasks(tasks));
-  dispatch(setPriorities(priors));
-  dispatch(setStatuses(stats));
-  dispatch(setManagers(managers));
-  dispatch(initialize());
+
+  batch(() => {
+    dispatch(setTasks(tasks));
+    dispatch(setPriorities(priors));
+    dispatch(setStatuses(stats));
+    dispatch(setManagers(managers));
+    dispatch(initialize());
+  });
 };
+
 export const createTask = (taskData) => async (dispatch) => {
   const taskId = await api.createTask(taskData);
   const taskToEdit = await api.getTaskToEdit(taskId);
   const tasks = await api.getTasks();
-  dispatch(setEditTaskData(taskToEdit));
-  dispatch(setTasks(tasks));
-  dispatch(setEditTaskId(taskId));
+
+  batch(() => {
+    dispatch(setEditTaskData(taskToEdit));
+    dispatch(setTasks(tasks));
+    dispatch(setEditTaskId(taskId));
+  });
 };
 
 export const editTask = (id) => async (dispatch) => {
   const taskToEdit = await api.getTaskToEdit(id);
-  dispatch(setEditTaskData(taskToEdit));
-  dispatch(setEditTaskId(id));
+
+  batch(() => {
+    dispatch(setEditTaskData(taskToEdit));
+    dispatch(setEditTaskId(id));
+  });
 };
 
 export const updateTask = (updateData) => async (dispatch) => {
   await api.updateTask(updateData);
   const tasks = await api.getTasks();
-  dispatch(setTasks(tasks));
   const taskToEdit = await api.getTaskToEdit(updateData.id);
-  dispatch(setEditTaskData(taskToEdit));
+
+  batch(() => {
+    dispatch(setTasks(tasks));
+    dispatch(setEditTaskData(taskToEdit));
+  });
 };

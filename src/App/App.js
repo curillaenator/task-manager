@@ -8,12 +8,15 @@ import styles from "./app.module.scss";
 
 const AppCont = ({ isInitialized, setInitial }) => {
   useEffect(() => setInitial(), []);
-  if (!isInitialized)
+
+  if (!isInitialized) {
     return (
       <div className={styles.container}>
         <h2 className={styles.loader}>Загрузка...</h2>
       </div>
     );
+  }
+
   return (
     <div className={styles.container}>
       <AsideCont />
