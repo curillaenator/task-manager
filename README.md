@@ -1,8 +1,9 @@
 # Таск-менеджер
 
-[Помотреть в работе][http://curillaenator.github.io/task-manager]
+[Помотреть в работе](http://curillaenator.github.io/task-manager)
 
 Реализовано:
+
 - страница с заявками
 - отображение списка заявок
 - создание заявок
@@ -17,7 +18,9 @@
 </p>
 
 Локальный запуск:
-### npm install
-затем
-### npm start
 
+### npm install
+
+затем
+
+### npm start
