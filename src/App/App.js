@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import { AsideCont } from "./Aside/AsideCont";
 import Header from "./Header/Header";
 import Content from "./Content/Content";
@@ -16,15 +15,13 @@ const AppCont = ({ isInitialized, setInitial }) => {
       </div>
     );
   return (
-    <BrowserRouter>
-      <div className={styles.container}>
-        <AsideCont />
-        <div className={styles.content}>
-          <Header />
-          <Content />
-        </div>
+    <div className={styles.container}>
+      <AsideCont />
+      <div className={styles.content}>
+        <Header />
+        <Content />
       </div>
-    </BrowserRouter>
+    </div>
   );
 };
 
