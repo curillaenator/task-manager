@@ -7,6 +7,7 @@ const required = (value) => (value ? undefined : "Обязательное по�
 
 const Textarea = ({ input, meta, ...props }) => {
   const hasError = meta.touched && meta.error;
+
   return (
     <div className={styles.textarea}>
       <textarea {...input} {...props}></textarea>
@@ -15,32 +16,31 @@ const Textarea = ({ input, meta, ...props }) => {
   );
 };
 
-const FormCreate = (props) => {
+const FormCreate = ({ toggleCreateForm, handleSubmit, values, form }) => {
   const submit = (e) => {
     e.preventDefault();
-    props.form.submit();
-    props.values.name && props.values.description && props.toggleCreateForm();
+    values.name && values.description && toggleCreateForm();
+    form.submit();
   };
-  const formDisplay = props.display ? "none" : "block";
+
   return (
-    <form
-      onSubmit={props.handleSubmit}
-      className={styles.newTask}
-      style={{ display: formDisplay }}
-    >
+    <form onSubmit={handleSubmit} className={styles.newTask}>
       <div className={styles.formTitle}>
         <h2>Новая заявка</h2>
-        <img src={close} alt="Закрыть" onClick={props.toggleCreateForm} />
+        <img src={close} alt="Закрыть" onClick={toggleCreateForm} />
       </div>
+
       <div className={styles.formBody}>
         <div className={styles.name}>
           <p>Название</p>
           <Field name="name" component={Textarea} validate={required} />
         </div>
+
         <div className={styles.description}>
           <p>Описание</p>
           <Field name="description" component={Textarea} validate={required} />
         </div>
+
         <div className={styles.save}>
           <Button
             title="Сохранить"

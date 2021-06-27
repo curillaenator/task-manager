@@ -29,42 +29,52 @@ const DashboardHeader = ({ dashNames, dashSizes }) => {
   );
 };
 
-const Tasks = (props) => {
+const Tasks = ({
+  tasksUI,
+  tasks,
+  isEditFormOn,
+  editTaskData,
+  editTask,
+  createTask,
+  updateTask,
+  setEditFormOff,
+}) => {
   const [isCreateForm, setCreateForm] = useState(false);
-  const toggleCreateForm = () => setCreateForm(!isCreateForm);
+
   const listStyle =
-    isCreateForm || props.isEditFormOn ? { width: "calc(100% - 976px)" } : {};
+    isCreateForm || isEditFormOn ? { width: "calc(100% - 976px)" } : {};
 
   return (
     <div className={styles.applications} style={listStyle}>
       <div className={styles.list}>
         <div className={styles.buttons}>
           <Button
-            title={props.newTask.ttl}
-            width={props.newTask.w}
-            height={props.newTask.h}
+            title={tasksUI.newTask.ttl}
+            width={tasksUI.newTask.w}
+            height={tasksUI.newTask.h}
             clicked={isCreateForm}
-            handler={toggleCreateForm}
-            disabled={props.isEditFormOn}
+            handler={() => setCreateForm(!isCreateForm)}
+            disabled={isEditFormOn}
           />
         </div>
 
         <div className={styles.dashboard}>
           <DashboardHeader
-            dashNames={props.dashNames}
-            dashSizes={props.dashSizes}
+            dashNames={tasksUI.dashNames}
+            dashSizes={tasksUI.dashSizes}
           />
+
           <div className={styles.listing}>
-            {props.dashData.map((req) => (
+            {tasks.tasks.map((applic) => (
               <Application
-                data={req}
-                dashSizes={props.dashSizes}
-                priorities={props.priorities}
-                statuses={props.statuses}
-                key={req.id}
-                editTask={props.editTask}
+                key={applic.id}
+                data={applic}
                 isCreateForm={isCreateForm}
-                isEditFormOn={props.isEditFormOn}
+                isEditFormOn={isEditFormOn}
+                dashSizes={tasksUI.dashSizes}
+                priorities={tasks.priorities}
+                statuses={tasks.statuses}
+                editTask={editTask}
                 setCreateForm={setCreateForm}
               />
             ))}
@@ -73,22 +83,20 @@ const Tasks = (props) => {
       </div>
 
       <div className={styles.forms}>
-        {isCreateForm && (
+        {isCreateForm && !isEditFormOn && (
           <NewTask
-            toggleCreateForm={toggleCreateForm}
-            createTask={props.createTask}
-            display={props.isEditFormOn}
+            toggleCreateForm={() => setCreateForm(!isCreateForm)}
+            createTask={createTask}
           />
         )}
 
-        {props.isEditFormOn && (
+        {isEditFormOn && (
           <UpdateTask
-            editTaskData={props.editTaskData}
-            editTaskId={props.editTaskId}
-            statuses={props.statuses}
-            managers={props.managers}
-            updateTask={props.updateTask}
-            setEditFormOff={props.setEditFormOff}
+            editTaskData={editTaskData}
+            statuses={tasks.statuses}
+            managers={tasks.managers}
+            updateTask={updateTask}
+            setEditFormOff={setEditFormOff}
           />
         )}
       </div>
@@ -97,15 +105,9 @@ const Tasks = (props) => {
 };
 
 const mstp = (state) => ({
-  newTask: state.ui.tasks.newTask,
-  saveComment: state.ui.tasks.saveComment,
-  dashNames: state.ui.tasks.dashNames,
-  dashSizes: state.ui.tasks.dashSizes,
-  dashData: state.tasks.tasks,
-  priorities: state.tasks.priorities,
-  statuses: state.tasks.statuses,
-  managers: state.tasks.managers,
-  editTaskId: state.tasks.editTaskId,
+  tasksUI: state.ui.tasks,
+  tasks: state.tasks,
+  // saveComment: state.ui.tasks.saveComment,
   isEditFormOn: state.tasks.isEditFormOn,
   editTaskData: state.tasks.editTaskData,
 });

@@ -57,6 +57,7 @@ const Descriptions = ({ editTaskData, submit }) => {
           handler={submit}
         />
       </div>
+
       <div className={styles.commentaries}>
         {editTaskData.lifetimeItems
           .filter((item) => item.comment)
@@ -146,11 +147,13 @@ const FormUpdate = ({ editTaskData, form, ...props }) => {
           <h2>№ {new Intl.NumberFormat("ru-RU").format(editTaskData.id)}</h2>
           <p>{editTaskData.name}</p>
         </div>
+
         <img src={close} alt="Закрыть" onClick={props.setEditFormOff} />
       </div>
 
       <div className={styles.formBody}>
         <Descriptions submit={submitComment} editTaskData={editTaskData} />
+        
         <Edits
           editTaskData={editTaskData}
           statuses={props.statuses}

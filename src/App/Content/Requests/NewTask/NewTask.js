@@ -1,22 +1,23 @@
 import { Form } from "react-final-form";
 import FormCreate from "./FormCreate";
 
-const NewTask = (props) => {
+const NewTask = ({ toggleCreateForm, createTask }) => {
   const onSubmitCreate = (formData) => {
     formData.resolutionDatePlan = new Date().toISOString();
-    props.createTask(formData);
+    createTask(formData);
   };
+
   return (
     <Form
       onSubmit={onSubmitCreate}
       render={({ handleSubmit, form, values }) => (
         <FormCreate
-          toggleCreateForm={props.toggleCreateForm}
+          toggleCreateForm={toggleCreateForm}
           handleSubmit={handleSubmit}
           values={values}
           form={form}
-          right={props.right}
-          display={props.display}
+          // display={display}
+          // right={props.right}
         />
       )}
     />
