@@ -89,7 +89,7 @@ const setStatuses: TAction<IStatus[]> = (payload) => ({
 
 const setEditTaskId: TAction<number> = (id) => ({ type: SET_EDIT_TASKID, id });
 
-const setEditTaskData: TAction<any> = (payload) => ({
+const setEditTaskData: TAction<ITask> = (payload) => ({
   type: SET_EDIT_TASKDATA,
   payload,
 });
