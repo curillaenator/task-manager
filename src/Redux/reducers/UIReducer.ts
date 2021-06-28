@@ -36,4 +36,6 @@ const initialState = {
   },
 };
 
+export type IDashSizes = typeof initialState.tasks.dashSizes
+
 export const ui = (state = initialState) => state;

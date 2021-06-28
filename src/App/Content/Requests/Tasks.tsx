@@ -1,35 +1,24 @@
-import { useState } from "react";
-import { connect } from "react-redux";
+import { useState, FC } from "react";
+import { connect, ConnectedProps } from "react-redux";
+
 import NewTask from "./NewTask/NewTask";
 import UpdateTask from "./UpdateTask/UpdateTask";
-import { Application } from "./Applications/Application";
+import { SingleTask } from "./SingleTask/SingleTask";
 import { Button } from "../../UICommon/Button/Button";
+
 import {
   createTask,
   editTask,
   updateTask,
   setEditFormOff,
 } from "../../../Redux/reducers/tasksReducer";
+import { TState } from "../../../Redux/store";
 
 import styles from "./tasks.module.scss";
 
-const DashboardHeader = ({ dashNames, dashSizes }) => {
-  return (
-    <div className={styles.naming}>
-      {dashNames.map((el) => (
-        <div
-          className={styles.item}
-          key={el.name}
-          style={{ width: dashSizes[el.name] }}
-        >
-          <p>{el.title}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+type TTasks = ConnectedProps<typeof connector>;
 
-const Tasks = ({
+const Tasks: FC<TTasks> = ({
   tasksUI,
   tasks,
   isEditFormOn,
@@ -59,21 +48,32 @@ const Tasks = ({
         </div>
 
         <div className={styles.dashboard}>
-          <DashboardHeader
-            dashNames={tasksUI.dashNames}
-            dashSizes={tasksUI.dashSizes}
-          />
+          <div className={styles.naming}>
+            {tasksUI.dashNames.map((dashItem) => {
+              const dashSizes: any = tasksUI.dashSizes;
+              const width: string = dashSizes[dashItem.name];
+
+              return (
+                <div
+                  className={styles.item}
+                  key={dashItem.name}
+                  style={{ width }}
+                >
+                  <p>{dashItem.title}</p>
+                </div>
+              );
+            })}
+          </div>
 
           <div className={styles.listing}>
-            {tasks.tasks.map((applic) => (
-              <Application
-                key={applic.id}
-                data={applic}
+            {tasks.tasks.map((task) => (
+              <SingleTask
+                key={task.id}
+                data={task}
                 isCreateForm={isCreateForm}
                 isEditFormOn={isEditFormOn}
                 dashSizes={tasksUI.dashSizes}
                 priorities={tasks.priorities}
-                statuses={tasks.statuses}
                 editTask={editTask}
                 setCreateForm={setCreateForm}
               />
@@ -104,17 +104,20 @@ const Tasks = ({
   );
 };
 
-const mstp = (state) => ({
+const mstp = (state: TState) => ({
   tasksUI: state.ui.tasks,
   tasks: state.tasks,
-  // saveComment: state.ui.tasks.saveComment,
   isEditFormOn: state.tasks.isEditFormOn,
   editTaskData: state.tasks.editTaskData,
 });
 
-export const TasksCont = connect(mstp, {
+const mdtp = {
   createTask,
   editTask,
   updateTask,
   setEditFormOff,
-})(Tasks);
+};
+
+const connector = connect(mstp, mdtp);
+
+export const TasksCont = connector(Tasks);

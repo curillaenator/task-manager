@@ -71,7 +71,7 @@ export interface TasksState {
   statuses: IStatus[];
   managers: IManager[];
   editTaskId: number | null;
-  editTaskData: any;
+  editTaskData: ITask | null;
   isEditFormOn: boolean;
   isNewFormOn: boolean;
 }

@@ -1,12 +1,21 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { connect } from "react-redux";
+
 import { AsideCont } from "./Aside/AsideCont";
 import Header from "./Header/Header";
 import Content from "./Content/Content";
+
 import { setInitial } from "../Redux/reducers/tasksReducer";
+import { TState } from "../Redux/store";
+
 import styles from "./app.module.scss";
 
-const AppCont = ({ isInitialized, setInitial }) => {
+interface IApp {
+  isInitialized: boolean;
+  setInitial: () => void;
+}
+
+const AppCont: FC<IApp> = ({ isInitialized, setInitial }) => {
   useEffect(() => setInitial(), []);
 
   if (!isInitialized) {
@@ -28,7 +37,7 @@ const AppCont = ({ isInitialized, setInitial }) => {
   );
 };
 
-const mstp = (state) => ({
+const mstp = (state: TState) => ({
   isInitialized: state.app.isInitialized,
 });
 

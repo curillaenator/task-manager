@@ -169,8 +169,8 @@ const FormUpdate = ({
 
       <div className={styles.formBody}>
         <Descriptions
-          handleComment={handleComment}
           editTaskData={editTaskData}
+          handleComment={handleComment}
         />
 
         <SetterList
