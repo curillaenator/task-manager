@@ -1,14 +1,31 @@
+import { FC } from "react";
 import { Form } from "react-final-form";
 import FormUpdate from "./FormUpdate";
 
-const UpdateTask = ({
+import type {
+  ITask,
+  IManager,
+  IStatus,
+  IUpdateTask,
+  TAction,
+} from "../../../../types/types";
+
+interface IUpdateTaskC {
+  editTaskData: ITask;
+  statuses: IStatus[];
+  managers: IManager[];
+  updateTask: (updateData: IUpdateTask) => void;
+  setEditFormOff: TAction<void>;
+}
+
+const UpdateTask: FC<IUpdateTaskC> = ({
   editTaskData,
   statuses,
   managers,
   updateTask,
   setEditFormOff,
 }) => {
-  const onSubmit = (formData) => {
+  const onSubmit = (formData: IUpdateTask) => {
     formData.id = editTaskData.id;
     updateTask(formData);
   };

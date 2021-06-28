@@ -92,7 +92,7 @@ const Tasks: FC<TTasks> = ({
 
         {isEditFormOn && (
           <UpdateTask
-            editTaskData={editTaskData}
+            editTaskData={editTaskData!}
             statuses={tasks.statuses}
             managers={tasks.managers}
             updateTask={updateTask}
