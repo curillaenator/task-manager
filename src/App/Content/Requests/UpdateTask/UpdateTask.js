@@ -18,12 +18,12 @@ const UpdateTask = ({
       onSubmit={onSubmit}
       render={({ handleSubmit, form }) => (
         <FormUpdate
-          handleSubmit={handleSubmit}
           form={form}
           editTaskData={editTaskData}
           statuses={statuses}
           managers={managers}
           setEditFormOff={setEditFormOff}
+          handleSubmit={handleSubmit}
         />
       )}
     />

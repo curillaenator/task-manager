@@ -8,6 +8,7 @@ import {
   TasksState,
   ITask,
   ICreateTask,
+  IUpdateTask,
   IStatus,
   IPriorities,
   IManager,
@@ -144,16 +145,17 @@ export const editTask = (id: number): TThunk => {
   };
 };
 
-export const updateTask = (updateData: any): TThunk => {
-  return async (dispatch) => {
-    const tasks: ITask[] = await api.getTasks();
-    const taskToEdit: any = await api.getTaskToEdit(updateData.id);
-
+export const updateTask = (updateData: IUpdateTask): TThunk => {
+  return async (dispatch, getState) => {
     await api.updateTask(updateData);
+    const taskUpdated: ITask = await api.getTaskToEdit(updateData.id);
+    const tasks = getState().tasks.tasks.map((task) =>
+      taskUpdated.id === task.id ? taskUpdated : task
+    );
 
     batch(() => {
       dispatch(setTasks(tasks));
-      dispatch(setEditTaskData(taskToEdit));
+      dispatch(setEditTaskData(taskUpdated));
     });
   };
 };

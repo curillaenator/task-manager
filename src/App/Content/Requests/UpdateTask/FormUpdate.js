@@ -35,7 +35,7 @@ const Comment = ({ item }) => {
   );
 };
 
-const Descriptions = ({ editTaskData, submit }) => {
+const Descriptions = ({ editTaskData, handleComment }) => {
   return (
     <div className={styles.descriptions}>
       <div className={styles.descr}>
@@ -54,7 +54,7 @@ const Descriptions = ({ editTaskData, submit }) => {
           title="Сохранить"
           width="150px"
           height="35px"
-          handler={submit}
+          handler={handleComment}
         />
       </div>
 
@@ -69,7 +69,7 @@ const Descriptions = ({ editTaskData, submit }) => {
   );
 };
 
-const Edits = (props) => {
+const SetterList = ({ editTaskData, statuses, managers, handleDropdown }) => {
   const options = {
     year: "numeric",
     month: "numeric",
@@ -79,16 +79,16 @@ const Edits = (props) => {
   return (
     <div className={styles.edits}>
       <DDSelect
+        dotRgb={editTaskData.statusRgb}
         name="statusId"
-        selected={props.editTaskData.statusId}
-        options={props.statuses}
-        form={props.form}
-        dotRgb={props.editTaskData.statusRgb}
+        selected={editTaskData.statusId}
+        options={statuses}
+        handleDropdown={handleDropdown}
       />
 
       <div className={styles.issuer}>
         <h3>Заявитель</h3>
-        <p>{props.editTaskData.initiatorName}</p>
+        <p>{editTaskData.initiatorName}</p>
       </div>
 
       <div className={styles.creator}>
@@ -98,14 +98,14 @@ const Edits = (props) => {
 
       <DDSelect
         name="executorId"
-        selected={props.editTaskData.executorId}
-        options={props.managers}
-        form={props.form}
+        selected={editTaskData.executorId}
+        options={managers}
+        handleDropdown={handleDropdown}
       />
 
       <div className={styles.priotity}>
         <h3>Приоритет</h3>
-        <p>{props.editTaskData.priorityName}</p>
+        <p>{editTaskData.priorityName}</p>
       </div>
 
       <div className={styles.expiry}>
@@ -113,7 +113,7 @@ const Edits = (props) => {
         <div className={styles.date}>
           <img src={date} alt="Дата" />
           <p>
-            {new Date(props.editTaskData.resolutionDatePlan).toLocaleString(
+            {new Date(editTaskData.resolutionDatePlan).toLocaleString(
               "ru",
               options
             )}
@@ -123,7 +123,7 @@ const Edits = (props) => {
 
       <div className={styles.tags}>
         <h3>Тэги</h3>
-        {props.editTaskData.tags.map((t) => (
+        {editTaskData.tags.map((t) => (
           <div className={styles.tag} key={t.id}>
             {t.name}
           </div>
@@ -133,33 +133,51 @@ const Edits = (props) => {
   );
 };
 
-const FormUpdate = ({ editTaskData, form, ...props }) => {
-  const submitComment = (e) => {
+const FormUpdate = ({
+  form,
+  editTaskData,
+  statuses,
+  managers,
+  handleSubmit,
+  setEditFormOff,
+}) => {
+  const handleComment = (e) => {
     e.preventDefault();
     form.submit();
     form.change("comment", undefined);
   };
 
+  const handleDropdown = (e, name) => {
+    e.preventDefault();
+    const comment = form.getFieldState("comment").value;
+    form.change(name, e.target.value);
+    form.change("comment", undefined);
+    form.submit();
+    form.change("comment", comment);
+  };
+
   return (
-    <form onSubmit={props.handleSubmit} className={styles.updateTask}>
+    <form onSubmit={handleSubmit} className={styles.updateTask}>
       <div className={styles.formTitle}>
         <div className={styles.formInfo}>
           <h2>№ {new Intl.NumberFormat("ru-RU").format(editTaskData.id)}</h2>
           <p>{editTaskData.name}</p>
         </div>
 
-        <img src={close} alt="Закрыть" onClick={props.setEditFormOff} />
+        <img src={close} alt="Закрыть" onClick={setEditFormOff} />
       </div>
 
       <div className={styles.formBody}>
-        <Descriptions submit={submitComment} editTaskData={editTaskData} />
-        
-        <Edits
+        <Descriptions
+          handleComment={handleComment}
           editTaskData={editTaskData}
-          statuses={props.statuses}
-          managers={props.managers}
-          submit={form.submit}
-          form={form}
+        />
+
+        <SetterList
+          editTaskData={editTaskData}
+          statuses={statuses}
+          managers={managers}
+          handleDropdown={handleDropdown}
         />
       </div>
     </form>

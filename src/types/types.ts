@@ -58,6 +58,12 @@ export interface ICreateTask {
   name: string;
   resolutionDatePlan: string;
 }
+export interface IUpdateTask {
+  executorId: string | number;
+  id: number;
+  statusId: string | number;
+  comment?: string;
+}
 
 export interface TasksState {
   tasks: ITask[];
