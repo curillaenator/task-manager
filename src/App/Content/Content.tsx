@@ -13,13 +13,13 @@ const SimpleC: FC<ISimpleC> = ({ title }) => (
 const Content: FC = () => {
   return (
     <>
-      <Route exact path="/" render={() => <TasksCont />} />
-      <Route path="/requests" render={() => <TasksCont />} />
-      <Route path="/knowledge" render={() => <SimpleC title="База знаний" />} />
-      <Route path="/employees" render={() => <SimpleC title="Сотрудники" />} />
-      <Route path="/clients" render={() => <SimpleC title="Клиенты" />} />
-      <Route path="/assets" render={() => <SimpleC title="Активы" />} />
-      <Route path="/settings" render={() => <SimpleC title="Настройки" />} />
+      <Route path="/" element={<TasksCont />} />
+      <Route path="/requests" element={<TasksCont />} />
+      <Route path="/knowledge" element={<SimpleC title="База знаний" />} />
+      <Route path="/employees" element={<SimpleC title="Сотрудники" />} />
+      <Route path="/clients" element={<SimpleC title="Клиенты" />} />
+      <Route path="/assets" element={<SimpleC title="Активы" />} />
+      <Route path="/settings" element={<SimpleC title="Настройки" />} />
     </>
   );
 };

@@ -8,13 +8,19 @@ const base = axios.create({
 export const api = {
   getTasks: () =>
     base.get(`odata/tasks?tenantguid=${key}`).then((r) => r.data.value),
+
   getPriorities: () => base.get(`api/${key}/Priorities`).then((r) => r.data),
+
   getStatuses: () => base.get(`api/${key}/Statuses`).then((r) => r.data),
+
   createTask: (taskData: any) =>
     base.post(`api/${key}/Tasks`, taskData).then((r) => r.data),
+
   getManagers: () => base.get(`api/${key}/Users`).then((r) => r.data),
+
   getTaskToEdit: (id: any) =>
     base.get(`api/${key}/Tasks/${id}`).then((r) => r.data),
+
   updateTask: (updateData: any) =>
     base.put(`api/${key}/Tasks`, updateData).then((r) => r),
 };

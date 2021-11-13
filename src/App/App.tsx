@@ -16,7 +16,7 @@ interface IApp {
 }
 
 const AppCont: FC<IApp> = ({ isInitialized, setInitial }) => {
-  useEffect(() => setInitial(), []);
+  useEffect(() => setInitial(), [setInitial]);
 
   if (!isInitialized) {
     return (
